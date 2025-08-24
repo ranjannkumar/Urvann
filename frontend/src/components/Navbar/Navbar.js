@@ -1,16 +1,17 @@
-import React, { useContext, useState } from 'react';
+// File: frontend/src/components/Navbar/Navbar.js
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
-// Navbar now receives setSearchQuery and setCategory as props
 const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
     const [menu, setMenu] = useState("menu");
     const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
     const navigate = useNavigate();
 
     const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
 
     const logout = () => {
         localStorage.removeItem("token");
@@ -21,19 +22,32 @@ const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
-        setCategory("All"); // Reset category to "All" on search
+        setCategory("All");
     };
+
+    const handleClickOutside = (event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+            setShowDropdown(false);
+        }
+    };
+
+    useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
 
     const isAdmin = token && JSON.parse(atob(token.split('.')[1])).email === 'admin@urvann.com';
 
     return (
         <div className='navbar'>
-            <Link to='/' ><img src={assets.logo} alt='' className='logo' /></Link>
+            <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}><img src={assets.logo} alt='' className='logo' /></Link>
             <ul className='navbar-menu'>
-                <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>home</Link>
+                <a href='#home' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>home</a>
                 <a href='#explore-menu' onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>menu</a>
                 <a href='#app-download' onClick={() => setMenu("mobile-app")} className={menu === "mobile-app" ? "active" : ""}>mobile-app</a>
-                <a href='#footer' onClick={() => setMenu("conatct us")} className={menu === "conatct us" ? "active" : ""}>contact us</a>
+                <a href='#footer' onClick={() => setMenu("contact us")} className={menu === "contact us" ? "active" : ""}>contact us</a>
                 {isAdmin && <Link to='/add' onClick={() => setMenu("add-plant")} className={menu === "add-plant" ? "active" : ""}>add plant</Link>}
             </ul>
             <div className='navbar-right'>
@@ -54,8 +68,8 @@ const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
                 ) : (
                     <div
                         className='navbar-profile'
-                        onMouseEnter={() => setShowDropdown(true)}
-                        onMouseLeave={() => setShowDropdown(false)}
+                        onClick={() => setShowDropdown(!showDropdown)}
+                        ref={dropdownRef}
                     >
                         <img src={assets.profile_icon} alt="" />
                         {showDropdown && (

@@ -122,3 +122,9 @@
     margin: 0 auto;
   }
 }
+
+@media (max-width: 900px) {
+  .footer-content-left img.logo {
+    width: 120px;
+  }
+}
