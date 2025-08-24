@@ -12,13 +12,22 @@ import plant_2 from './plant_2.png'
 import plant_3 from './plant_3.png'
 import plant_4 from './plant_4.png'
 import plant_5 from './plant_5.png'
-// import plant_6 from './plant_6.png'
-// import plant_7 from './plant_7.png'
-// import plant_8 from './plant_8.png'
-// import plant_9 from './plant_9.png'
-// import plant_10 from './plant_10.png'
-// import plant_11 from './plant_11.png'
-// import plant_12 from './plant_12.png'
+// I'm using the existing plant images as placeholders for new categories.
+import plant_6 from './plant_1.png' 
+import plant_7 from './plant_2.png'
+import plant_8 from './plant_3.png'
+import plant_9 from './plant_4.png'
+import plant_10 from './plant_5.png'
+import plant_11 from './plant_1.png'
+import plant_12 from './plant_2.png'
+import plant_13 from './plant_3.png'
+import plant_14 from './plant_4.png'
+import plant_15 from './plant_5.png'
+import plant_16 from './plant_1.png'
+import plant_17 from './plant_2.png'
+import plant_18 from './plant_3.png'
+import plant_19 from './plant_4.png'
+import plant_20 from './plant_5.png'
 
 import add_icon_white from './add_icon_white.png'
 import add_icon_green from './add_icon_green.png'
@@ -34,6 +43,17 @@ import profile_icon from './profile_icon.png'
 import bag_icon from './bag_icon.png'
 import logout_icon from './logout_icon.png'
 import parcel_icon from './parcel_icon.png'
+
+// Placeholder for new category icons
+import indoor_icon from './menu_1.png'
+import outdoor_icon from './menu_2.png'
+import succulent_icon from './menu_3.png'
+import air_purifying_icon from './menu_4.png'
+import home_decor_icon from './menu_1.png' // Placeholder image
+import herb_icon from './menu_2.png' // Placeholder image
+import flowers_icon from './menu_3.png' // Placeholder image
+import large_plants_icon from './menu_4.png' // Placeholder image
+import placeholder_menu from './placeholder_menu.png' 
 
 
 export const assets = {
@@ -54,25 +74,51 @@ export const assets = {
     profile_icon,
     logout_icon,
     bag_icon,
-    parcel_icon
+    parcel_icon,
+    // Add the new category icons here
+    indoor_icon,
+    outdoor_icon,
+    succulent_icon,
+    air_purifying_icon,
+    home_decor_icon,
+    herb_icon,
+    flowers_icon,
+    large_plants_icon,
+    placeholder_menu,
 }
 
 export const plant_menu_list = [
     {
         menu_name: "Indoor",
-        menu_image: menu_1
+        menu_image: assets.indoor_icon
     },
     {
         menu_name: "Outdoor",
-        menu_image: menu_2
+        menu_image: assets.outdoor_icon
     },
     {
         menu_name: "Succulent",
-        menu_image: menu_3
+        menu_image: assets.succulent_icon
     },
     {
         menu_name: "Air Purifying",
-        menu_image: menu_4
+        menu_image: assets.air_purifying_icon
+    },
+    {
+      menu_name: "Home Decor",
+      menu_image: assets.home_decor_icon
+    },
+    {
+      menu_name: "Herb",
+      menu_image: assets.herb_icon
+    },
+    {
+      menu_name: "Flowers",
+      menu_image: assets.flowers_icon
+    },
+    {
+      menu_name: "Large Plants",
+      menu_image: assets.large_plants_icon
     }
 ]
 
@@ -117,60 +163,4 @@ export const plant_list = [
         description: "A beautiful flowering plant with fragrant blooms, ideal for outdoor gardens.",
         category: "Outdoor"
     },
-    // {
-    //     _id: "6",
-    //     name: "Sunflower",
-    //     image: plant_6,
-    //     price: 180,
-    //     description: "A tall, vibrant plant with a large, yellow flower head that follows the sun.",
-    //     category: "Outdoor"
-    // },
-    // {
-    //     _id: "7",
-    //     name: "Lavender",
-    //     image: plant_7,
-    //     price: 250,
-    //     description: "A fragrant, purple-flowered herb known for its calming properties.",
-    //     category: "Outdoor"
-    // },
-    // {
-    //     _id: "8",
-    //     name: "Cactus",
-    //     image: plant_8,
-    //     price: 100,
-    //     description: "A resilient succulent that thrives in dry, sunny conditions.",
-    //     category: "Succulent"
-    // },
-    // {
-    //     _id: "9",
-    //     name: "Echeveria",
-    //     image: plant_9,
-    //     price: 130,
-    //     description: "A rosette-shaped succulent with beautiful, symmetrical leaves.",
-    //     category: "Succulent"
-    // },
-    // {
-    //     _id: "10",
-    //     name: "String of Pearls",
-    //     image: plant_10,
-    //     price: 280,
-    //     description: "A unique succulent with spherical leaves that trail over the pot's edge.",
-    //     category: "Succulent"
-    // },
-    // {
-    //     _id: "11",
-    //     name: "Peace Lily",
-    //     image: plant_11,
-    //     price: 350,
-    //     description: "A stunning plant with white flowers that purifies the air and is easy to maintain.",
-    //     category: "Air Purifying"
-    // },
-    // {
-    //     _id: "12",
-    //     name: "ZZ Plant",
-    //     image: plant_12,
-    //     price: 400,
-    //     description: "A low-maintenance plant that is highly effective at removing toxins from the air.",
-    //     category: "Air Purifying"
-    // }
 ]

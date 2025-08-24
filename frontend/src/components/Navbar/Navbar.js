@@ -10,10 +10,14 @@ const Navbar = ({ setShowLogin, setSearchQuery }) => {
     const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
     const navigate = useNavigate();
 
+    // New state to control the dropdown visibility
+    const [showDropdown, setShowDropdown] = useState(false);
+
     const logout = () => {
         localStorage.removeItem("token");
         setToken("");
         navigate("/");
+        setShowDropdown(false); // Hide the dropdown on logout
     };
 
     const handleSearchChange = (e) => {
@@ -49,13 +53,25 @@ const Navbar = ({ setShowLogin, setSearchQuery }) => {
                 {!token ? (
                     <button onClick={() => setShowLogin(true)}>sign in</button>
                 ) : (
-                    <div className='navbar-profile'>
+                    // The parent div for the profile icon and dropdown menu
+                    <div
+                        className='navbar-profile'
+                        onMouseEnter={() => setShowDropdown(true)}
+                        onMouseLeave={() => setShowDropdown(false)}
+                    >
                         <img src={assets.profile_icon} alt="" />
-                        <ul className="nav-profile-dropdown">
-                            <li onClick={() => navigate('/myorders')}><img src={assets.bag_icon} alt="" /><p>Orders</p></li>
-                            <hr />
-                            <li onClick={logout}><img src={assets.logout_icon} alt="" /><p>Logout</p></li>
-                        </ul>
+                        {/* Conditionally render the dropdown based on state */}
+                        {showDropdown && (
+                            <ul className="nav-profile-dropdown">
+                                <li onClick={() => { navigate('/myorders'); setShowDropdown(false); }}>
+                                    <img src={assets.bag_icon} alt="" /><p>Orders</p>
+                                </li>
+                                <hr />
+                                <li onClick={logout}>
+                                    <img src={assets.logout_icon} alt="" /><p>Logout</p>
+                                </li>
+                            </ul>
+                        )}
                     </div>
                 )}
             </div>
