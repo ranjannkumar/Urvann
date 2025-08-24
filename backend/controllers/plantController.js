@@ -1,5 +1,8 @@
-// This file is updated to include search and filter logic.
+// This file contains the controller logic for plants, including search, filter, and add functionalities.
+
 import Plant from '../models/plantModel.js';
+import { v4 as uuidv4 } from 'uuid';
+import path from 'path';
 
 // Function to fetch all plants with search and filter
 const getPlants = async (req, res) => {
@@ -7,33 +10,38 @@ const getPlants = async (req, res) => {
     const { name, category } = req.query;
     let query = {};
 
-    // Build the query object based on parameters
     if (name) {
-      // Use case-insensitive regex for name search
+      // Use a more comprehensive query to search by name or category keyword
       const regex = new RegExp(name, 'i');
-      query.name = { $regex: regex };
+      query = {
+        $or: [
+          { name: { $regex: regex } },
+          { categories: { $regex: regex } }
+        ]
+      };
     }
 
     if (category && category !== 'All') {
-      // Filter by category if one is provided and it's not "All"
-      query.category = category;
+      // Add category filter to the query
+      query.categories = category;
     }
 
     const allPlants = await Plant.find(query);
     res.json({ success: true, data: allPlants });
   } catch (err) {
+    console.error("Error fetching plants:", err.message);
     res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 };
 
-// Function to add a new plant
+// Function to add a new plant (Admin Feature)
 const addPlant = async (req, res) => {
   try {
     const { name, price, categories, availability, image, description } = req.body;
 
-    // Validate inputs
+    // Basic input validation
     if (!name || !price || !categories || typeof availability !== 'boolean' || !image || !description) {
-      return res.status(400).json({ message: 'All fields (name, price, categories, availability, image, description) are required and valid.' });
+      return res.status(400).json({ success: false, message: 'All fields (name, price, categories, availability, image, description) are required and must be valid.' });
     }
 
     const newPlant = new Plant({
@@ -46,18 +54,20 @@ const addPlant = async (req, res) => {
     });
 
     await newPlant.save();
-    res.status(201).json(newPlant);
+    res.status(201).json({ success: true, message: 'Plant added successfully', data: newPlant });
   } catch (err) {
-    res.status(500).json({ message: 'Server error', error: err.message });
+    console.error("Error adding plant:", err.message);
+    res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 };
 
-// Function to get all unique categories
+// Function to get all unique categories dynamically
 const getCategories = async (req, res) => {
   try {
-    const categories = await Plant.distinct('category');
-    res.json({ success: true, data: categories });
+    const categories = await Plant.distinct('categories');
+    res.json({ success: true, data: ["All", ...categories] });
   } catch (err) {
+    console.error("Error fetching categories:", err.message);
     res.status(500).json({ success: false, message: 'Server error', error: err.message });
   }
 };

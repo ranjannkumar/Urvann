@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import './ExploreMenu.css';
 import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
+import { assets } from '../../assets/assets';
 
 const ExploreMenu = ({ category, setCategory, setSearchQuery }) => {
   const { url } = useContext(StoreContext);
@@ -10,7 +11,11 @@ const ExploreMenu = ({ category, setCategory, setSearchQuery }) => {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(url + "/api/plants/categories");
-      setCategories(["All", ...response.data.data]);
+      if (response.data.success) {
+        setCategories(response.data.data);
+      } else {
+        console.error("Failed to fetch categories:", response.data.message);
+      }
     } catch (error) {
       console.error("Error fetching categories:", error);
     }
@@ -18,11 +23,11 @@ const ExploreMenu = ({ category, setCategory, setSearchQuery }) => {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
+  }, [url]);
 
   const handleCategoryClick = (menu_name) => {
     setCategory(prev => prev === menu_name ? "All" : menu_name);
-    setSearchQuery(""); // Clear search query when a category is selected
+    setSearchQuery(""); // Clear search query when a new category is selected
   };
 
   return (
@@ -31,14 +36,15 @@ const ExploreMenu = ({ category, setCategory, setSearchQuery }) => {
       <p className='explore-menu-text'>Browse our diverse collection of plants by category. Select a category to see related plants, or view all to explore our entire catalog.</p>
       <div className="explore-menu-list">
         {categories.map((item, index) => {
+          // You need to add an image for each category here. I'm using a placeholder.
+          // Add images to `frontend/src/assets` and import them in `assets.js`
           return (
             <div
               onClick={() => handleCategoryClick(item)}
               key={index}
               className="explore-menu-list-item"
             >
-              {/* You will need to manage images for your categories */}
-              <img className={category === item ? "active" : ""} src={`/path/to/${item.toLowerCase()}.png`} alt={item} />
+              <img className={category === item ? "active" : ""} src={assets[`menu_${item.toLowerCase().replace(' ', '_')}`] || assets.placeholder_menu} alt={item} />
               <p>{item}</p>
             </div>
           );

@@ -18,7 +18,7 @@ const Home = () => {
     <div>
       <Header />
       <ExploreMenu category={category} setCategory={setCategory} setSearchQuery={setSearchQuery} />
-      <PlantDisplay category={category} />
+      <PlantDisplay category={category} searchQuery={searchQuery} />
       <AppDownload />
     </div>
   );

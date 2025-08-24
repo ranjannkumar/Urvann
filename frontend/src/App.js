@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
+import Add from './pages/Add/Add';
 // import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import Footer from './components/Footer/Footer';
 import LoginPopup from './components/LoginPopup/LoginPopup';
@@ -25,6 +26,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/cart' element={<Cart />} />
+           <Route path='/add' element={<Add />} /> 
           {/* <Route path='/order' element={<PlaceOrder />} /> */}
           {/* <Route path='/verify' element={<Verify />} /> */}
           {/* <Route path='/myorders' element={<MyOrder />} /> */}
