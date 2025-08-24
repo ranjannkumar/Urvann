@@ -39,7 +39,7 @@ const StoreContextProvider = (props) => {
     };
 
     const fetchPlantList = async () => {
-        const response = await axios.get(url + "/api/plants/list");
+        const response = await axios.get(url + "/api/plants");
         setPlantList(response.data.data);
     };
 

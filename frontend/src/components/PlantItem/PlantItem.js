@@ -7,11 +7,14 @@ import { StoreContext } from '../../context/StoreContext';
 const PlantItem = ({ id, name, price, description, image }) => {
   const { cartItems, addToCart, removeFromCart, url } = useContext(StoreContext);
 
+  // Check if cartItems is a valid object and has the id as a key
+  const isItemInCart = cartItems && cartItems[id];
+
   return (
     <div className='plant-item'>
       <div className="plant-item-img-container">
-        <img className='plant-item-image' src={url + "/images/" + image} alt="" />
-        {!cartItems[id] ? (
+        {/* Use the new variable for the condition */}
+        {!isItemInCart ? (
           <img className='add' onClick={() => addToCart(id)} src={assets.add_icon_white} alt="" />
         ) : (
           <div className="plant-item-counter">

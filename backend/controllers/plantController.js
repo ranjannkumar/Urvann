@@ -25,18 +25,20 @@ const getPlants = async (req, res) => {
 // Function to add a new plant
 const addPlant = async (req, res) => {
   try {
-    const { name, price, categories, availability } = req.body;
+    const { name, price, categories, availability, image, description } = req.body;
 
     // Validate inputs
-    if (!name || !price || !categories || typeof availability !== 'boolean') {
-      return res.status(400).json({ message: 'All fields (name, price, categories, availability) are required and valid.' });
+    if (!name || !price || !categories || typeof availability !== 'boolean' || !image || !description) {
+      return res.status(400).json({ message: 'All fields (name, price, categories, availability, image, description) are required and valid.' });
     }
 
     const newPlant = new Plant({
       name,
       price,
       categories,
-      availability
+      availability,
+      image,
+      description
     });
 
     await newPlant.save();
