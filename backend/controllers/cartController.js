@@ -1,5 +1,5 @@
 // New controller for handling cart operations.
-import userModel from '../models/cartModel.js';
+import userModel from '../models/userModel.js';
 
 // Add to cart
 const addToCart = async (req, res) => {

@@ -11,8 +11,19 @@ const PlantDisplay = ({ category }) => {
       <h2>Top picks for you</h2>
       <div className="plant-display-list">
         {plant_list.map((item, index) => {
-          if (category === "All" || category === item.category) {
-            return <PlantItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />;
+          if (category === "All" || item.categories.includes(category)) {
+            return (
+              <PlantItem
+                key={index}
+                id={item._id}
+                name={item.name}
+                description={item.description}
+                price={item.price}
+                image={item.image}
+                availability={item.availability} // Pass availability
+                categories={item.categories} // Pass categories
+              />
+            );
           }
           return null;
         })}

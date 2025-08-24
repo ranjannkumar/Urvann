@@ -9,6 +9,7 @@ import plantRoutes from './routes/plantRoutes.js';
 import plantData from './data/plants.js'; // Note the change from plantsData
 import Plant from './models/plantModel.js';
 import cartRouter from './routes/cartRoute.js';
+import userRouter from './routes/userRoute.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -49,6 +50,7 @@ app.use('/images', express.static(path.join(__dirname, 'uploads')));
 // Use the plant and cart routes
 app.use('/api/plants', plantRoutes);
 app.use('/api/cart', cartRouter);
+app.use('/api/user', userRouter);
 
 // Start the server
 app.listen(PORT, () => {
