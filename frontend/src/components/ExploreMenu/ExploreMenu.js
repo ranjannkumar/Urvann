@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react';
-import './ExploreMenu.css';
-import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
-import { assets, plant_menu_list } from '../../assets/assets';
+import { useContext, useEffect, useState } from 'react';
+import { plant_menu_list } from '../../assets/assets';
+import { StoreContext } from '../../context/StoreContext';
+import './ExploreMenu.css';
 
 const ExploreMenu = ({ category, setCategory, setSearchQuery }) => {
   const { url } = useContext(StoreContext);

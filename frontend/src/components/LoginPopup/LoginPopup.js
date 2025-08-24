@@ -1,10 +1,9 @@
-// File: frontend/src/components/LoginPopup/LoginPopup.js
-import React, { useContext, useState } from 'react';
-import './LoginPopup.css';
+import axios from 'axios';
+import { useContext, useState } from 'react';
+import { toast } from 'react-toastify';
 import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/StoreContext';
-import axios from 'axios';
-import { toast } from 'react-toastify';
+import './LoginPopup.css';
 
 
 const LoginPopup = ({ setShowLogin }) => {
@@ -76,5 +75,4 @@ const LoginPopup = ({ setShowLogin }) => {
 
 export default LoginPopup;
 
-// File: frontend/src/components/LoginPopup/LoginPopup.css
 

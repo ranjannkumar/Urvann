@@ -1,4 +1,3 @@
-// This file manages the application state and API calls.
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
@@ -16,17 +15,14 @@ const StoreContextProvider = (props) => {
             let endpoint = `${url}/api/plants`;
             const params = new URLSearchParams();
             
-            // Add category to params if it's not "All"
             if (category && category !== "All") {
                 params.append("category", category);
             }
             
-            // Add search query to params if it exists
             if (searchQuery) {
                 params.append("name", searchQuery);
             }
 
-            // Append parameters to the endpoint if any exist
             if (params.toString()) {
                 endpoint += `?${params.toString()}`;
             }
@@ -99,7 +95,7 @@ const StoreContextProvider = (props) => {
         url,
         token,
         setToken,
-        fetchPlantList // Make fetchPlantList available in the context
+        fetchPlantList 
     };
 
     return (

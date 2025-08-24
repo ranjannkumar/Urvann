@@ -1,4 +1,3 @@
-// File: backend/controllers/userController.js
 import userModel from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
@@ -41,7 +40,6 @@ const registerUser = async (req, res) => {
             return res.json({ success: false, message: "User already exists" });
         }
 
-        // Validating email format and strong password
         if (!validator.isEmail(email)) {
             return res.json({ success: false, message: "Please enter a valid email" });
         }
@@ -50,7 +48,6 @@ const registerUser = async (req, res) => {
             return res.json({ success: false, message: "Please enter a strong password (at least 8 characters)" });
         }
 
-        // Hashing user password
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 

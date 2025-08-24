@@ -1,10 +1,5 @@
-// This file contains the controller logic for plants, including search, filter, and add functionalities.
-
 import Plant from '../models/plantModel.js';
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
 
-// Function to fetch all plants with search and filter
 const getPlants = async (req, res) => {
   try {
     const { name, category } = req.query;
@@ -39,7 +34,6 @@ const addPlant = async (req, res) => {
   try {
     const { name, price, categories, availability, image, description } = req.body;
 
-    // Basic input validation
     if (!name || !price || !categories || typeof availability !== 'boolean' || !image || !description) {
       return res.status(400).json({ success: false, message: 'All fields (name, price, categories, availability, image, description) are required and must be valid.' });
     }
@@ -73,7 +67,7 @@ const getCategories = async (req, res) => {
 };
 
 export {
-  getPlants,
   addPlant,
-  getCategories,
+  getCategories, getPlants
 };
+

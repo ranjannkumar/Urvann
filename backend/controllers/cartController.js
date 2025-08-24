@@ -1,4 +1,3 @@
-// New controller for handling cart operations.
 import userModel from '../models/userModel.js';
 
 // Add to cart

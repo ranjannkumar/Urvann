@@ -1,9 +1,8 @@
-// File: frontend/src/components/Navbar/Navbar.js
-import React, { useContext, useState, useRef, useEffect } from 'react';
-import './Navbar.css';
-import { assets } from '../../assets/assets';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { assets } from '../../assets/assets';
 import { StoreContext } from '../../context/StoreContext';
+import './Navbar.css';
 
 const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
     const [menu, setMenu] = useState("menu");

@@ -1,8 +1,7 @@
-// This is the new cart page component.
-import React, { useContext } from 'react';
-import './Cart.css';
-import { StoreContext } from '../../context/StoreContext';
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { StoreContext } from '../../context/StoreContext';
+import './Cart.css';
 
 const Cart = () => {
     const { cartItems, plant_list, removeFromCart, getTotalCartAmount, url } = useContext(StoreContext);

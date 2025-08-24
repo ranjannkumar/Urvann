@@ -1,7 +1,5 @@
-// File: frontend/src/components/Footer/Footer.js
-import React from 'react';
-import './Footer.css';
 import { assets } from '../../assets/assets';
+import './Footer.css';
 
 const Footer = () => {
   return (

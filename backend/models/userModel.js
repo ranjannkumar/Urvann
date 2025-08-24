@@ -1,4 +1,3 @@
-// We'll create a new model for the cart. This will be embedded in the user model.
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({

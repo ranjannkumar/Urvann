@@ -1,8 +1,8 @@
-import React, { useState, useContext } from 'react';
-import './Add.css';
-import { StoreContext } from '../../context/StoreContext';
 import axios from 'axios';
+import { useContext, useState } from 'react';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../context/StoreContext';
+import './Add.css';
 
 const Add = () => {
     const { url, token } = useContext(StoreContext);
@@ -12,7 +12,7 @@ const Add = () => {
         price: "",
         categories: "",
         availability: true,
-        image: "placeholder.png", // Using a placeholder image for now
+        image: "placeholder.png", 
         description: ""
     });
 
@@ -28,7 +28,6 @@ const Add = () => {
     const onSubmitHandler = async (event) => {
         event.preventDefault();
         try {
-            // Split categories string into an array
             const newCategories = data.categories.split(',').map(c => c.trim());
 
             // Prepare payload
@@ -87,7 +86,6 @@ const Add = () => {
                         <option value={false}>Out of Stock</option>
                     </select>
                 </div>
-                {/* You need to handle image uploads properly on the backend, for this example we are using a placeholder. */}
                 <input type="hidden" name="image" value="placeholder.png" />
                 <button type="submit">Add Plant</button>
             </form>

@@ -1,4 +1,3 @@
-// The plant schema is updated to include the image property.
 import mongoose from 'mongoose';
 
 const plantSchema = new mongoose.Schema({

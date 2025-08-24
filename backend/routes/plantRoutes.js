@@ -1,14 +1,11 @@
 import express from 'express';
 import { getPlants, addPlant, getCategories } from '../controllers/plantController.js';
-import authMiddleware from '../middleware/auth.js'; // Assuming you have an authMiddleware
+import authMiddleware from '../middleware/auth.js'; 
 
 const router = express.Router();
 
 // Mock admin middleware for demonstration purposes
 const adminMiddleware = (req, res, next) => {
-  // In a real application, you would check the user's role from the JWT payload.
-  // For this example, we assume if a user is logged in with a specific email, they are an admin.
-  // You would need to add user data to the JWT payload in your userController.
   if (req.user && req.user.email === 'admin@urvann.com') {
     next();
   } else {

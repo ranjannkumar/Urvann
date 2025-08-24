@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
-import './PlantDisplay.css';
+import { useContext } from 'react';
 import { StoreContext } from '../../context/StoreContext';
 import PlantItem from '../PlantItem/PlantItem';
+import './PlantDisplay.css';
 
 const PlantDisplay = ({ category }) => {
   const { plant_list } = useContext(StoreContext);
@@ -20,8 +20,8 @@ const PlantDisplay = ({ category }) => {
                 description={item.description}
                 price={item.price}
                 image={item.image}
-                availability={item.availability} // Pass availability
-                categories={item.categories} // Pass categories
+                availability={item.availability} 
+                categories={item.categories} 
               />
             );
           }
