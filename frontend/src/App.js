@@ -4,32 +4,29 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Cart from './pages/Cart/Cart';
 import Add from './pages/Add/Add';
-// import PlaceOrder from './pages/PlaceOrder/PlaceOrder';
 import Footer from './components/Footer/Footer';
 import LoginPopup from './components/LoginPopup/LoginPopup';
 import StoreContextProvider from './context/StoreContext';
-// import Verify from './pages/Verify/Verify';
-// import MyOrder from './pages/MyOrder/MyOrder';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-
 const App = () => {
   const [showLogin, setShowLogin] = useState(false);
-  
+  const [searchQuery, setSearchQuery] = useState("");
+  const [category, setCategory] = useState("All");
+
   return (
     <StoreContextProvider>
       <ToastContainer />
       {showLogin ? <LoginPopup setShowLogin={setShowLogin} /> : <></>}
       <div className='app'>
-        <Navbar setShowLogin={setShowLogin} />
+        {/* Pass setSearchQuery and category state to Navbar */}
+        <Navbar setShowLogin={setShowLogin} setSearchQuery={setSearchQuery} setCategory={setCategory} />
         <Routes>
-          <Route path='/' element={<Home />} />
+          {/* Pass searchQuery and category state to Home */}
+          <Route path='/' element={<Home category={category} setCategory={setCategory} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />} />
           <Route path='/cart' element={<Cart />} />
-           <Route path='/add' element={<Add />} /> 
-          {/* <Route path='/order' element={<PlaceOrder />} /> */}
-          {/* <Route path='/verify' element={<Verify />} /> */}
-          {/* <Route path='/myorders' element={<MyOrder />} /> */}
+          <Route path='/add' element={<Add />} /> 
         </Routes>
       </div>
       <Footer />

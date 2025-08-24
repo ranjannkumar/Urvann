@@ -1,30 +1,29 @@
-// The navigation bar is updated to include a search bar, and conditional links for admin users.
 import React, { useContext, useState } from 'react';
 import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { Link, useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
-const Navbar = ({ setShowLogin, setSearchQuery }) => {
+// Navbar now receives setSearchQuery and setCategory as props
+const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
     const [menu, setMenu] = useState("menu");
     const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
     const navigate = useNavigate();
 
-    // New state to control the dropdown visibility
     const [showDropdown, setShowDropdown] = useState(false);
 
     const logout = () => {
         localStorage.removeItem("token");
         setToken("");
         navigate("/");
-        setShowDropdown(false); // Hide the dropdown on logout
+        setShowDropdown(false);
     };
 
     const handleSearchChange = (e) => {
         setSearchQuery(e.target.value);
+        setCategory("All"); // Reset category to "All" on search
     };
 
-    // Assuming you have a way to determine the user role from the token
     const isAdmin = token && JSON.parse(atob(token.split('.')[1])).email === 'admin@urvann.com';
 
     return (
@@ -53,14 +52,12 @@ const Navbar = ({ setShowLogin, setSearchQuery }) => {
                 {!token ? (
                     <button onClick={() => setShowLogin(true)}>sign in</button>
                 ) : (
-                    // The parent div for the profile icon and dropdown menu
                     <div
                         className='navbar-profile'
                         onMouseEnter={() => setShowDropdown(true)}
                         onMouseLeave={() => setShowDropdown(false)}
                     >
                         <img src={assets.profile_icon} alt="" />
-                        {/* Conditionally render the dropdown based on state */}
                         {showDropdown && (
                             <ul className="nav-profile-dropdown">
                                 <li onClick={() => { navigate('/myorders'); setShowDropdown(false); }}>
