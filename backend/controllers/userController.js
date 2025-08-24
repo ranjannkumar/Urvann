@@ -1,7 +1,12 @@
+// File: backend/controllers/userController.js
 import userModel from '../models/userModel.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import validator from 'validator';
+
+const createToken = (id, email) => {
+    return jwt.sign({ id, email }, process.env.JWT_SECRET);
+};
 
 // Login User
 const loginUser = async (req, res) => {
@@ -18,7 +23,7 @@ const loginUser = async (req, res) => {
             return res.json({ success: false, message: "Invalid credentials" });
         }
 
-        const token = createToken(user._id);
+        const token = createToken(user._id, user.email);
         res.json({ success: true, token });
     } catch (error) {
         console.error(error);
@@ -56,16 +61,12 @@ const registerUser = async (req, res) => {
         });
 
         const user = await newUser.save();
-        const token = createToken(user._id);
+        const token = createToken(user._id, user.email);
         res.json({ success: true, token });
     } catch (error) {
         console.error(error);
         res.json({ success: false, message: "Error during registration" });
     }
-};
-
-const createToken = (id) => {
-    return jwt.sign({ id }, process.env.JWT_SECRET);
 };
 
 export { loginUser, registerUser };

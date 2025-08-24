@@ -44,10 +44,10 @@ const Navbar = ({ setShowLogin, setSearchQuery, setCategory }) => {
         <div className='navbar'>
             <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}><img src={assets.logo} alt='' className='logo' /></Link>
             <ul className='navbar-menu'>
-                <a href='#home' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>home</a>
-                <a href='#explore-menu' onClick={() => setMenu("menu")} className={menu === "menu" ? "active" : ""}>menu</a>
-                <a href='#app-download' onClick={() => setMenu("mobile-app")} className={menu === "mobile-app" ? "active" : ""}>mobile-app</a>
-                <a href='#footer' onClick={() => setMenu("contact us")} className={menu === "contact us" ? "active" : ""}>contact us</a>
+                <Link to='/' onClick={() => setMenu("home")} className={menu === "home" ? "active" : ""}>home</Link>
+                <Link to='/' onClick={() => { setMenu("menu"); setTimeout(() => document.getElementById("explore-menu")?.scrollIntoView({ behavior: 'smooth' }), 100); }} className={menu === "menu" ? "active" : ""}>menu</Link>
+                <Link to='/' onClick={() => { setMenu("mobile-app"); setTimeout(() => document.getElementById("app-download")?.scrollIntoView({ behavior: 'smooth' }), 100); }} className={menu === "mobile-app" ? "active" : ""}>mobile-app</Link>
+                <Link to='/' onClick={() => { setMenu("contact us"); setTimeout(() => document.getElementById("footer")?.scrollIntoView({ behavior: 'smooth' }), 100); }} className={menu === "contact us" ? "active" : ""}>contact us</Link>
                 {isAdmin && <Link to='/add' onClick={() => setMenu("add-plant")} className={menu === "add-plant" ? "active" : ""}>add plant</Link>}
             </ul>
             <div className='navbar-right'>
